@@ -1,0 +1,137 @@
+#include<stdio.h>
+#include<conio.h>
+#include<ctype.h>
+#include<stdlib.h>
+#include<graphics.h>
+#include<stddef.h>
+void cancel()
+{ exit(1);
+}
+int balance=0,deposit=0,m,d,x,withdraw,n=0,b=0,c=0,i;
+char ch;
+FILE * fptr;
+void main()
+{ fptr=fopen("c:\\turboc3\\balance","r");
+if(fptr==NULL)
+{ fptr=fopen("c:\\turboc3\\balance","w");
+balance=0;
+fprintf(fptr,"%d",balance);
+main();
+}
+else
+{
+int x,y,x1,y1;
+textbackground(1);
+textcolor(15);
+clrscr();
+x=0;
+y=1;
+gotoxy(x,y);
+for(x=0;x<=80;x++)
+{gotoxy(x,y);
+printf("%c",186);
+if(x==80)
+{ x=0;
+y++;
+}
+if(y>=26)
+break;
+}
+gotoxy(1,4);
+textbackground(5);
+// textcolor(0);
+printf("                                   ");
+gotoxy(12,4);
+printf("1. DEPOSIT");
+gotoxy(40,4);
+printf("2. WITHDRAW");
+gotoxy(65,4);
+printf("3. CANCEL");
+gotoxy(25,19);
+printf("Enter Your Choice ... :    ");
+gotoxy(50,19);
+scanf("%c",&ch);
+
+n=atoi(&ch);
+switch(n)
+{case 1:
+textcolor(WHITE);
+textbackground(2);
+clrscr();
+deposit=0;
+balance=0;
+fscanf(fptr,"%d",&balance);
+printf("\n\n\n\n\n\n#############################################################");
+printf("\n\n\n Your Credit Amount is ..Rs : %d",balance);
+printf("\n\n #############################################################");
+printf("\n\n Enter the Deposit Amount Rs : ");
+scanf("%d",&deposit);
+c=deposit+balance;
+fclose(fptr);
+printf("\n\n\n\n NOW YOUR BALANCE Rs: %d ",c);
+fptr=fopen("c:\\turboc3\\balance","w");
+fprintf(fptr,"%d",c);
+fclose(fptr);
+d=0;
+getch();
+main();
+break;
+case 2: textcolor(15);
+textbackground(1);
+clrscr();
+balance=0;
+fscanf(fptr,"%d",&balance);
+fclose(fptr);
+if(balance==0)
+{ printf("\n\n\n\n\n *********************************************");
+printf("\n *                                                     *");
+printf("\n * *");
+printf("\n * Your Balance is 0 *");
+printf("\n * *");
+printf("\n * Please Deposit the amount *");
+printf("\n * *");
+printf("\n * *");
+printf("\n *********************************************");
+getch();
+d=0;
+main();
+}
+else
+{ int withdraw=0;
+printf("\n\n\n\n\n\n YOUR BALANCE IS...........Rs : %d",balance);
+printf("\n\n\n Enter the withdraw Amount.Rs : ");
+scanf("%d",&withdraw);
+if(balance&withdraw)
+{ balance=balance-withdraw;
+printf("\n\n\n NOW YOUR BALANCE IS.......Rs : %d",balance);
+fptr=fopen("c:\\turboc3\\balance","w");
+fprintf(fptr,"%d",balance);
+fclose(fptr);
+
+getch();
+d=0;
+main();
+}
+else
+{
+printf("\n\n\n\n\n\n#############################################################");
+printf("\n\n\n YOU ENTERED THE EXCEED AMOUNT",balance);
+printf("\n\n #############################################################");
+getch();
+main();
+}
+}
+break;
+case 3: textcolor(15);
+textbackground(12);
+clrscr();
+printf("\n\n\n\n\n\n*************************************************************");
+printf("\n\n\n\n\n THANK YOU VISIT AGAIN.... ");
+printf("\n\n\n\n*************************************************************");
+getch();
+cancel();
+default : main();
+}
+}
+}
+getch();
